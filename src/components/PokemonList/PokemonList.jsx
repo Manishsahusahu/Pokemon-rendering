@@ -14,7 +14,7 @@ const PokemonList = () => {
   const [prevurl, setPrevurl] = useState("");
 
   async function downloadData() {
-    setIsLoading(true)
+    setIsLoading(true);
     const response = await axios.get(pokedexUrl);
 
     setNexturl(response.data.next);
@@ -55,12 +55,25 @@ const PokemonList = () => {
                 key={pokemon.id}
                 name={pokemon.name}
                 image={pokemon.image}
+                id={pokemon.id}
               />
             ))}
       </div>
       <div className="buttons">
-        <button disabled={!prevurl} onClick={()=> setPokedexUrl(prevurl)} className="controls-button">Prev</button>
-        <button disabled={!nexturl} onClick={()=> setPokedexUrl(nexturl)} className="controls-button">Next</button>
+        <button
+          disabled={!prevurl}
+          onClick={() => setPokedexUrl(prevurl)}
+          className="controls-button"
+        >
+          Prev
+        </button>
+        <button
+          disabled={!nexturl}
+          onClick={() => setPokedexUrl(nexturl)}
+          className="controls-button"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
