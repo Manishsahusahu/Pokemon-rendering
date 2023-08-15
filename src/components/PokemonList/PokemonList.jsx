@@ -33,8 +33,24 @@ const PokemonList = () => {
 
   return (
     <div className="pokemon-list-wrapper">
-      <div>PokemonList</div>
-      {isLoading ? "Is loading..." : PokemonList.map((pokemon) => <Pokemon key={pokemon.id} name={pokemon.name} image={pokemon.image} />)}
+      <div>
+        <h4>Pokemon List</h4>
+      </div>
+      <div className="pokemon-wrapper">
+        {isLoading
+          ? "Is loading..."
+          : PokemonList.map((pokemon) => (
+              <Pokemon
+                key={pokemon.id}
+                name={pokemon.name}
+                image={pokemon.image}
+              />
+            ))}
+      </div>
+      <div className="buttons">
+        <button className="controls-button">Prev</button>
+        <button className="controls-button">Next</button>
+      </div>
     </div>
   );
 };
