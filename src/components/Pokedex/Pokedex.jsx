@@ -11,10 +11,10 @@ const Pokedex = () => {
     <div className="pokedex-wrapper">
       <h1 id="pokedex-heading">Pokedex</h1>
       <Search updateSearchTerm={SetsearchTerm} />
-      {searchTerm.length === 0 ? (
+      {!searchTerm ? (
         <PokemonList />
       ) : (
-        <PokemonDetails pokemonName={searchTerm} />
+        <PokemonDetails key={searchTerm} pokemonName={searchTerm} />
       )}
     </div>
   );

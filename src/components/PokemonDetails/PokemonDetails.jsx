@@ -7,20 +7,24 @@ const PokemonDetails = ({ pokemonName }) => {
   const [pokemon, setPokemon] = useState({});
 
   async function downloadData() {
-    let response;
-    if (pokemonName)
-      response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-      );
-    else if (id)
-      response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    setPokemon({
-      name: response.data.name,
-      image: response.data.sprites.other.dream_world.front_default,
-      weight: response.data.weight,
-      height: response.data.hegiht,
-      types: response.data.types.map((t) => t.type.name),
-    });
+    try {
+      let response;
+      if (pokemonName)
+        response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+        );
+      else if (id)
+        response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      setPokemon({
+        name: response.data.name,
+        image: response.data.sprites.other.dream_world.front_default,
+        weight: response.data.weight,
+        height: response.data.hegiht,
+        types: response.data.types.map((t) => t.type.name),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   useEffect(() => {
