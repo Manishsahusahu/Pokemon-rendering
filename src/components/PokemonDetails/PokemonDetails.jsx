@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./PokemonDetails.css";
 
 const PokemonDetails = ({ pokemonName }) => {
   const { id } = useParams();
@@ -26,21 +27,35 @@ const PokemonDetails = ({ pokemonName }) => {
       console.log(error.message);
     }
   }
+  const upperCase= (name)=>{
+    return name.charAt(0).toUpperCase()+name.slice(1)
+  }
 
   useEffect(() => {
     downloadData();
   }, []);
 
   return (
-    <div className="pokemon-details-wrapper">
-      <div className="pokemon-name">Name: {pokemon.name}</div>
+    <div className="pokemon-details-wrapper mt-3">
       <div className="pokemon-image">
-        <img src={pokemon.image} alt="" />
+        <img className="" src={pokemon.image} alt="" />
       </div>
-      <div className="pokemon-height">Height: {pokemon.height}</div>
-      <div className="pokemon-weight">Weight: {pokemon.weight}</div>
-      <div className="pokemon-types">
-        {pokemon.types && pokemon.types.map((t) => <div key={t}>{t}</div>)}
+      <div className="pokemon-name mt-1">
+        <span className="fw-bold">Name:</span> {pokemon.name && upperCase(pokemon.name)}
+      </div>
+      <div className="pokemon-height mt-1">
+        <span className="fw-bold">Height:</span> {pokemon.height}
+      </div>
+      <div className="pokemon-weight mt-1">
+        <span className="fw-bold">Weight: </span>
+        {pokemon.weight}
+      </div>
+      <div className="mt-1 fw-bold">{pokemon.types && "Types:"}</div>
+      <div className="pokemon-types mt-1">
+        {pokemon.types &&
+          pokemon.types.map((t) => (
+            <div key={t}>{t.slice(0, 1).toUpperCase() + t.slice(1)}</div>
+          ))}
       </div>
     </div>
   );
